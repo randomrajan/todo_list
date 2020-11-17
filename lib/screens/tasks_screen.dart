@@ -3,8 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/widgets/task_tile.dart';
 import 'package:todo_list/widgets/tasks_list.dart';
 import 'package:todo_list/screens/add_task_screen.dart';
+import 'package:todo_list/modal/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: 'Buy milk'),
+    Task(name: 'Buy eggs'),
+    Task(name: 'Buy bread')
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
