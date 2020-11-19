@@ -17,6 +17,7 @@ class _TasksScreenState extends State<TasksScreen> {
     Task(name: 'Buy bread')
   ];
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,15 @@ class _TasksScreenState extends State<TasksScreen> {
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
         onPressed: (){
-          showModalBottomSheet(context: context, builder: (context) => AddTaskScreen());
+          showModalBottomSheet(context: context, builder: (context) => AddTaskScreen(
+              (newTaskTitle){
+                //print(newTaskTitle);
+                setState(() {
+                  tasks.add(Task(name: newTaskTitle));
+                });
+                Navigator.pop(context);
+              }
+          ));
         },
       ),
       body: Column(
@@ -57,7 +66,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '12 tasks',
+                  '${tasks.length} Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -74,7 +83,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   color: Colors.white,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0),)
               ),
-              child: TasksList(),
+              child: TasksList(tasks),
             ),
           ),
         ],
